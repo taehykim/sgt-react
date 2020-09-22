@@ -11,12 +11,27 @@ class GradeTable extends React.Component {
               <th>Name</th>
               <th>Course</th>
               <th>Grade</th>
+              <th>Operations</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.grades.map(grade => {
-              return <Grade key={grade.id} grade={grade} />;
-            })}
+            {this.props.grades.length !== 0 ? (
+              this.props.grades.map(grade => {
+                return (
+                  <Grade
+                    key={grade.id}
+                    grade={grade}
+                    onDeleteClick={this.props.onDeleteClick}
+                  />
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan="4" className="no-grades-row">
+                  <h5>No Grades Recorded</h5>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
