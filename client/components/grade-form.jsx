@@ -3,7 +3,7 @@ import React from 'react';
 class GradeForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { name: '', course: '', grade: '' };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCourseChange = this.handleCourseChange.bind(this);
     this.handleGradeChange = this.handleGradeChange.bind(this);
@@ -24,13 +24,13 @@ class GradeForm extends React.Component {
   }
 
   handleCancel() {
-    this.setState({ name: null, course: null, grade: null });
+    this.setState({ name: '', course: '', grade: '' });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state);
-    e.target.reset();
+    this.setState({ name: '', course: '', grade: '' });
   }
 
   render() {
@@ -49,6 +49,7 @@ class GradeForm extends React.Component {
               className="form-control"
               id="name"
               placeholder="Student Name"
+              value={this.state.name}
               onChange={this.handleNameChange}
             />
           </div>
@@ -64,6 +65,7 @@ class GradeForm extends React.Component {
               className="form-control"
               id="course"
               placeholder="Student Course"
+              value={this.state.course}
               onChange={this.handleCourseChange}
             />
           </div>
@@ -78,6 +80,7 @@ class GradeForm extends React.Component {
               className="form-control"
               id="grade"
               placeholder="Student Grade"
+              value={this.state.grade}
               onChange={this.handleGradeChange}
             />
           </div>
