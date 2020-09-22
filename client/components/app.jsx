@@ -71,14 +71,14 @@ class App extends React.Component {
       <div className="container">
         <Header average={avg} />
         <hr></hr>
-        <div className="row">
-          <div className="col-8">
+        <div className="row content-group">
+          <div className="col-8 table-div">
             <GradeTable
               grades={this.state.grades}
               onDeleteClick={this.deleteGrade}
             />
           </div>
-          <div className="col-4">
+          <div className="col-4 form-div">
             <GradeForm onSubmit={this.addGrade} />
           </div>
         </div>

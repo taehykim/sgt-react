@@ -36,7 +36,7 @@ class GradeForm extends React.Component {
   render() {
     return (
       <div>
-        <h3>Add Grade</h3>
+        <h3 id="form-title">Add Grade</h3>
         <form onSubmit={this.handleSubmit}>
           <div className="input-group mb-3">
             <div className="input-group-prepend">
