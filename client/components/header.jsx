@@ -3,7 +3,7 @@ import React from 'react';
 class Header extends React.Component {
   render() {
     return (
-      <div className="row header-group mt-3">
+      <div className="row mt-3 justify-content-between align-items-center flex-lg-row flex-sm-column">
         <h1>Student Grade Table</h1>
         <h2>
           Average Grade

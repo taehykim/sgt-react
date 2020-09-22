@@ -27,7 +27,10 @@ class GradeTable extends React.Component {
               })
             ) : (
               <tr>
-                <td colSpan="4" className="no-grades-row">
+                <td
+                  colSpan="4"
+                  className="no-grades-row text-lg-left text-sm-center"
+                >
                   <h5>No Grades Recorded</h5>
                 </td>
               </tr>

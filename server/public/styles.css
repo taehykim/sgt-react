@@ -10,30 +10,3 @@ thead tr {
 .no-grades-row {
   background-color: white;
 }
-
-@media screen and (max-width: 1000px) {
-  hr {
-    width: 95%;
-  }
-
-  div.header-group,
-  div.content-group {
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-  }
-
-  div.table-div,
-  div.form-div {
-    max-width: 90%;
-  }
-
-  td.no-grades-row h5 {
-    text-align: center;
-  }
-
-  h3#form-title {
-    text-align: center;
-  }
-}
