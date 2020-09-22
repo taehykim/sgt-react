@@ -9,6 +9,7 @@ class App extends React.Component {
     this.state = { grades: [] };
     this.getAverageGrade = this.getAverageGrade.bind(this);
     this.addGrade = this.addGrade.bind(this);
+    this.deleteGrade = this.deleteGrade.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +46,25 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  deleteGrade(id) {
+    const deletingIndex = this.state.grades.findIndex(
+      grade => grade.id === id
+    );
+
+    const init = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    };
+    fetch(`/api/grades/${id}`, init)
+      .then(res => res.json())
+      .then(data => {
+        const updated = [...this.state.grades];
+        updated.splice(deletingIndex, 1);
+        this.setState({ grades: updated });
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     const avg = this.getAverageGrade();
     return (
@@ -53,7 +73,10 @@ class App extends React.Component {
         <hr></hr>
         <div className="row">
           <div className="col-8">
-            <GradeTable grades={this.state.grades} />
+            <GradeTable
+              grades={this.state.grades}
+              onDeleteClick={this.deleteGrade}
+            />
           </div>
           <div className="col-4">
             <GradeForm onSubmit={this.addGrade} />

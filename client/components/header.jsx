@@ -8,7 +8,7 @@ class Header extends React.Component {
         <h2>
           Average Grade
           <span className="badge badge-secondary ml-2">
-            {this.props.average ? this.props.average : '?N/A'}
+            {this.props.average ? this.props.average : 'N/A'}
           </span>
         </h2>
       </div>

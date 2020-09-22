@@ -6,3 +6,7 @@
 thead tr {
   border-top: hidden;
 }
+
+.no-grades-row {
+  background-color: white;
+}
