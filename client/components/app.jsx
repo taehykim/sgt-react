@@ -6,10 +6,17 @@ import GradeForm from './grade-form';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { grades: [] };
+    this.state = {
+      grades: [],
+      wantsToUpdate: false,
+      updatingIndex: null,
+      updatingId: null
+    };
     this.getAverageGrade = this.getAverageGrade.bind(this);
     this.addGrade = this.addGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +72,41 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  handleUpdateClick(data) {
+    this.updateInfo = { data: data };
+    const updatingIndex = this.state.grades.findIndex(
+      grade => grade.id === data.id
+    );
+
+    this.setState({
+      wantsToUpdate: true,
+      updatingIndex: updatingIndex,
+      updatingId: data.id
+    });
+  }
+
+  updateGrade(data) {
+    const init = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+    fetch(`api/grades/${this.state.updatingId}`, init)
+      .then(res => res.json())
+      .then(data => {
+        const updated = [...this.state.grades];
+        updated[this.state.updatingIndex] = data;
+        this.setState({
+          grades: updated,
+          updatingIndex: null,
+          wantsToUpdate: false,
+          updatingId: null
+        });
+        this.updateInfo = { data: null };
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     const avg = this.getAverageGrade();
     return (
@@ -76,10 +118,16 @@ class App extends React.Component {
             <GradeTable
               grades={this.state.grades}
               onDeleteClick={this.deleteGrade}
+              onUpdateClick={this.handleUpdateClick}
             />
           </div>
           <div className="col-lg-4 col-sm-12">
-            <GradeForm onSubmit={this.addGrade} />
+            <GradeForm
+              onSubmit={this.addGrade}
+              onUpdateClick={this.updateGrade}
+              wantsToUpdate={this.state.wantsToUpdate}
+              updateInfo={this.updateInfo}
+            />
           </div>
         </div>
       </div>

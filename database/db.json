@@ -1,3 +1,17 @@
 {
-  "grades": []
+  "grades": [
+    {
+      "name": "Tae",
+      "course": "CS",
+      "grade": "30",
+      "id": 1
+    },
+    {
+      "name": "Tae",
+      "course": "CS",
+      "grade": "65",
+      "id": 2,
+      "wantsToUpdate": true
+    }
+  ]
 }
