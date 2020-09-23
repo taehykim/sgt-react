@@ -30,22 +30,33 @@ class GradeForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit(this.state);
+    this.props.onSubmit({
+      name: this.state.name,
+      course: this.state.course,
+      grade: this.state.grade
+    });
     this.setState({ name: '', course: '', grade: '' });
   }
 
   handleUpdateBtn() {
-    this.props.onUpdateClick(this.state);
+    this.props.onUpdateClick({
+      name: this.state.name,
+      course: this.state.course,
+      grade: this.state.grade
+    });
     this.setState({ name: '', course: '', grade: '', wantsToUpdate: false });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.updateInfo !== prevProps.updateInfo) {
+    if (
+      this.props.updateInfo !== prevProps.updateInfo &&
+      this.props.updateInfo !== null
+    ) {
       this.setState({
-        name: this.props.updateInfo.data.name,
-        course: this.props.updateInfo.data.course,
-        grade: this.props.updateInfo.data.grade,
-        wantsToUpdate: this.props.wantsToUpdate
+        name: this.props.updateInfo.name,
+        course: this.props.updateInfo.course,
+        grade: this.props.updateInfo.grade,
+        wantsToUpdate: true
       });
     }
   }

@@ -3,15 +3,14 @@
     {
       "name": "Tae",
       "course": "CS",
-      "grade": "30",
+      "grade": "70",
       "id": 1
     },
     {
-      "name": "Tae",
+      "name": "Tia",
       "course": "CS",
-      "grade": "65",
-      "id": 2,
-      "wantsToUpdate": true
+      "grade": "100",
+      "id": 2
     }
   ]
 }

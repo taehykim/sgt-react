@@ -8,9 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       grades: [],
-      wantsToUpdate: false,
-      updatingIndex: null,
-      updatingId: null
+      updateInfo: null
     };
     this.getAverageGrade = this.getAverageGrade.bind(this);
     this.addGrade = this.addGrade.bind(this);
@@ -73,15 +71,8 @@ class App extends React.Component {
   }
 
   handleUpdateClick(data) {
-    this.updateInfo = { data: data };
-    const updatingIndex = this.state.grades.findIndex(
-      grade => grade.id === data.id
-    );
-
     this.setState({
-      wantsToUpdate: true,
-      updatingIndex: updatingIndex,
-      updatingId: data.id
+      updateInfo: data
     });
   }
 
@@ -91,18 +82,19 @@ class App extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     };
-    fetch(`api/grades/${this.state.updatingId}`, init)
+    fetch(`api/grades/${this.state.updateInfo.id}`, init)
       .then(res => res.json())
       .then(data => {
+        const updatingIndex = this.state.grades.findIndex(
+          grade => grade.id === this.state.updateInfo.id
+        );
+
         const updated = [...this.state.grades];
-        updated[this.state.updatingIndex] = data;
+        updated[updatingIndex] = data;
         this.setState({
           grades: updated,
-          updatingIndex: null,
-          wantsToUpdate: false,
-          updatingId: null
+          updateInfo: null
         });
-        this.updateInfo = { data: null };
       })
       .catch(err => console.error(err));
   }
@@ -125,8 +117,7 @@ class App extends React.Component {
             <GradeForm
               onSubmit={this.addGrade}
               onUpdateClick={this.updateGrade}
-              wantsToUpdate={this.state.wantsToUpdate}
-              updateInfo={this.updateInfo}
+              updateInfo={this.state.updateInfo}
             />
           </div>
         </div>
