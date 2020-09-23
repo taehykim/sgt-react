@@ -3,7 +3,7 @@ import React from 'react';
 class GradeForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: '', course: '', grade: '', wantsToUpdate: false };
+    this.state = { name: '', course: '', grade: '' };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCourseChange = this.handleCourseChange.bind(this);
     this.handleGradeChange = this.handleGradeChange.bind(this);
@@ -25,7 +25,7 @@ class GradeForm extends React.Component {
   }
 
   handleCancel() {
-    this.setState({ name: '', course: '', grade: '', wantsToUpdate: false });
+    this.setState({ name: '', course: '', grade: '' });
   }
 
   handleSubmit(e) {
@@ -44,7 +44,7 @@ class GradeForm extends React.Component {
       course: this.state.course,
       grade: this.state.grade
     });
-    this.setState({ name: '', course: '', grade: '', wantsToUpdate: false });
+    this.setState({ name: '', course: '', grade: '' });
   }
 
   componentDidUpdate(prevProps) {
@@ -55,8 +55,7 @@ class GradeForm extends React.Component {
       this.setState({
         name: this.props.updateInfo.name,
         course: this.props.updateInfo.course,
-        grade: this.props.updateInfo.grade,
-        wantsToUpdate: true
+        grade: this.props.updateInfo.grade
       });
     }
   }
@@ -65,7 +64,7 @@ class GradeForm extends React.Component {
     let addBtn = 'btn btn-success mr-2';
     let updateBtn = 'btn btn-success mr-2';
 
-    if (this.state.wantsToUpdate) {
+    if (this.props.updateInfo) {
       addBtn += ' d-none';
     } else {
       updateBtn += ' d-none';

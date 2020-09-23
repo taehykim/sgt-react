@@ -5,12 +5,6 @@
       "course": "CS",
       "grade": "70",
       "id": 1
-    },
-    {
-      "name": "Tia",
-      "course": "CS",
-      "grade": "100",
-      "id": 2
     }
   ]
 }
