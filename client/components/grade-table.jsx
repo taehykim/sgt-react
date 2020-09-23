@@ -22,6 +22,7 @@ class GradeTable extends React.Component {
                     key={grade.id}
                     grade={grade}
                     onDeleteClick={this.props.onDeleteClick}
+                    onUpdateClick={this.props.onUpdateClick}
                   />
                 );
               })

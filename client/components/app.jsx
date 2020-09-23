@@ -6,10 +6,15 @@ import GradeForm from './grade-form';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { grades: [] };
+    this.state = {
+      grades: [],
+      updateInfo: null
+    };
     this.getAverageGrade = this.getAverageGrade.bind(this);
     this.addGrade = this.addGrade.bind(this);
     this.deleteGrade = this.deleteGrade.bind(this);
+    this.updateGrade = this.updateGrade.bind(this);
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +70,35 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  handleUpdateClick(data) {
+    this.setState({
+      updateInfo: data
+    });
+  }
+
+  updateGrade(data) {
+    const init = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    };
+    fetch(`api/grades/${this.state.updateInfo.id}`, init)
+      .then(res => res.json())
+      .then(data => {
+        const updatingIndex = this.state.grades.findIndex(
+          grade => grade.id === this.state.updateInfo.id
+        );
+
+        const updated = [...this.state.grades];
+        updated[updatingIndex] = data;
+        this.setState({
+          grades: updated,
+          updateInfo: null
+        });
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     const avg = this.getAverageGrade();
     return (
@@ -76,10 +110,15 @@ class App extends React.Component {
             <GradeTable
               grades={this.state.grades}
               onDeleteClick={this.deleteGrade}
+              onUpdateClick={this.handleUpdateClick}
             />
           </div>
           <div className="col-lg-4 col-sm-12">
-            <GradeForm onSubmit={this.addGrade} />
+            <GradeForm
+              onSubmit={this.addGrade}
+              onUpdateClick={this.updateGrade}
+              updateInfo={this.state.updateInfo}
+            />
           </div>
         </div>
       </div>
