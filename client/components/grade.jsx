@@ -18,17 +18,20 @@ class Grade extends React.Component {
   render() {
     return (
       <tr>
-        <td>{this.props.grade.name}</td>
-        <td>{this.props.grade.course}</td>
-        <td>{this.props.grade.grade}</td>
-        <td>
+        <td className="align-middle">{this.props.grade.name}</td>
+        <td className="align-middle">{this.props.grade.course}</td>
+        <td className="align-middle">{this.props.grade.grade}</td>
+        <td className="align-middle">
           <button
-            className="btn btn-danger mr-2"
+            className="btn btn-danger rounded-pill border-0 mr-2 delete-btn"
             onClick={this.handleDeleteClick}
           >
             DELETE
           </button>
-          <button className="btn btn-primary" onClick={this.handleUpdateClick}>
+          <button
+            className="btn btn-primary rounded-pill border-0 update-btn"
+            onClick={this.handleUpdateClick}
+          >
             UPDATE
           </button>
         </td>
