@@ -72,7 +72,7 @@ class GradeForm extends React.Component {
 
     return (
       <div>
-        <h3 className="text-lg-left text-sm-center">Add Grade</h3>
+        <h3 className="text-lg-left text-sm-center add-grade">Add Grade</h3>
         <form onSubmit={this.handleSubmit}>
           <div className="input-group mb-3">
             <div className="input-group-prepend">
@@ -85,6 +85,7 @@ class GradeForm extends React.Component {
               className="form-control"
               id="name"
               placeholder="Student Name"
+              autoComplete="off"
               value={this.state.name}
               onChange={this.handleNameChange}
             />
@@ -101,6 +102,7 @@ class GradeForm extends React.Component {
               className="form-control"
               id="course"
               placeholder="Student Course"
+              autoComplete="off"
               value={this.state.course}
               onChange={this.handleCourseChange}
             />
@@ -116,6 +118,7 @@ class GradeForm extends React.Component {
               className="form-control"
               id="grade"
               placeholder="Student Grade"
+              autoComplete="off"
               value={this.state.grade}
               onChange={this.handleGradeChange}
             />
