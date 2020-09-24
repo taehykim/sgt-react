@@ -11,6 +11,10 @@ The Gradebook is a dynamic web application for teachers who want to record the g
 - CSS3
 
 ## Features
+- Users can add a new student's record
+- Users can update an existing student's record
+- Users can delete an existing student's record
+- Users can view the average grade of all students
 
 ## Preview
 ![Gradebook App Demo](assets/gradebook.gif)
